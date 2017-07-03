@@ -14,12 +14,12 @@ RUN apt-get -y install --install-recommends winehq-devel
 # user
 RUN adduser --disabled-password --gecos "" wineuser
 RUN echo 'wineuser:remotex11' | chpasswd
-RUN su wineuser -c 'wine wineboot --init WINEARCH=win32'
+RUN su wineuser -c 'WINEPREFIX=~/.wine/ WINEARCH=win32 wine wineboot --init'
 
 # winetricks
 RUN wget  https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks
 RUN chmod +x winetricks
-RUN su wineuser -c './winetricks -q dotnet462 WINEARCH=win32'
+RUN su wineuser -c 'WINEPREFIX=~/.wine/ WINEARCH=win32 ./winetricks -q dotnet462'
 
 # X11 forwarding
 RUN mkdir /var/run/sshd

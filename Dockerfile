@@ -17,8 +17,8 @@ RUN echo 'wineuser:remotex11' | chpasswd
 RUN su wineuser -c 'wine wineboot --init WINEARCH=win32'
 
 # winetricks
-wget  https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks
-chmod +x winetricks
+RUN wget  https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks
+RUN chmod +x winetricks
 RUN su wineuser -c './winetricks -q dotnet462 WINEARCH=win32'
 
 # X11 forwarding

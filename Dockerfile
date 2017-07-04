@@ -16,7 +16,7 @@ USER wineuser
 WORKDIR /home/wineuser
 
 # winetricks
-RUN wget https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks winetricks && chmod +x winetricks
+RUN wget https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks && chmod +x winetricks
 RUN WINEARCH=win32 ./winetricks -q dotnet462
 
 # X11 forwarding

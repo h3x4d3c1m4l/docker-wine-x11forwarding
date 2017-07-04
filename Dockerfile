@@ -13,6 +13,7 @@ RUN apt-get update && apt-get -y install --install-recommends winehq-devel
 RUN adduser --disabled-password --gecos "" wineuser
 RUN echo 'wineuser:remotex11' | chpasswd
 USER wineuser
+ENV LOGNAME=wineuser
 WORKDIR /home/wineuser
 
 # winetricks

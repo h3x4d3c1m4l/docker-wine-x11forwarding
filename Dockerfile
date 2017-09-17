@@ -3,7 +3,7 @@ FROM ubuntu:16.04
 # preparations
 RUN echo 'root:remotex11' | chpasswd
 RUN dpkg --add-architecture i386
-RUN apt-get update && apt-get -y upgrade && apt-get -y install wget software-properties-common apt-transport-https openssh-server xauth cabextract winbind squashfs-tools
+RUN apt-get update && apt-get -y upgrade && apt-get -y install wget software-properties-common apt-transport-https openssh-server xauth cabextract winbind squashfs-tools xvfb
 
 # wine
 RUN wget -nc https://dl.winehq.org/wine-builds/Release.key && apt-key add Release.key && apt-add-repository https://dl.winehq.org/wine-builds/ubuntu/

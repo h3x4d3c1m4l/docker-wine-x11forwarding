@@ -3,7 +3,8 @@ FROM ubuntu:16.04
 # preparations
 RUN echo 'root:remotex11' | chpasswd
 RUN dpkg --add-architecture i386
-RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get -qy upgrade && apt-get -qy install wget software-properties-common apt-transport-https openssh-server xauth cabextract winbind squashfs-tools xvfb x11vnc xserver-xephyr xpra websockify
+ENV DEBIAN_FRONTEND noninteractive
+RUN apt-get update && apt-get -qy upgrade && apt-get -qy install wget software-properties-common apt-transport-https openssh-server xauth cabextract winbind squashfs-tools xvfb x11vnc xserver-xephyr xpra websockify
 
 # wine
 RUN wget -nc https://dl.winehq.org/wine-builds/Release.key && apt-key add Release.key && apt-add-repository https://dl.winehq.org/wine-builds/ubuntu/

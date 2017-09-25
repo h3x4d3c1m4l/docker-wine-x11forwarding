@@ -20,7 +20,7 @@ RUN echo "X11Forwarding yes\n" >> /etc/ssh/ssh_config
 RUN echo "ForwardX11Trusted yes\n" >> /etc/ssh/ssh_config
 
 # user
-RUN adduser -G xpra --disabled-password --gecos "" wineuser
+RUN useradd -m -s /bin/bash -G xpra wineuser
 RUN echo 'wineuser:remotex11' | chpasswd
 USER wineuser
 ENV LOGNAME=wineuser

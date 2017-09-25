@@ -1,7 +1,6 @@
 FROM ubuntu:16.04
 
 # preparations
-RUN echo 'root:remotex11' | chpasswd
 RUN dpkg --add-architecture i386
 ENV DEBIAN_FRONTEND noninteractive
 ENV WINEDEBUG -all

@@ -4,11 +4,12 @@ FROM ubuntu:16.04
 RUN echo 'root:remotex11' | chpasswd
 RUN dpkg --add-architecture i386
 ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get update && apt-get -qy upgrade && apt-get -qy install wget software-properties-common apt-transport-https openssh-server xauth cabextract winbind squashfs-tools xvfb x11vnc xserver-xephyr xpra websockify
+RUN apt-get update && apt-get -qy upgrade && apt-get -qy install wget software-properties-common apt-transport-https openssh-server xauth cabextract winbind squashfs-tools xvfb x11vnc xserver-xephyr websockify
 
-# wine
-RUN wget -nc https://dl.winehq.org/wine-builds/Release.key && apt-key add Release.key && apt-add-repository https://dl.winehq.org/wine-builds/ubuntu/
-RUN apt-get update && apt-get -y install --install-recommends winehq-devel
+# wine & xpra
+RUN wget -qO- https://dl.winehq.org/wine-builds/Release.key | apt-key add - && apt-add-repository https://dl.winehq.org/wine-builds/ubuntu/
+RUN wget -qO- http://winswitch.org/gpg.asc | apt-key add - && apt-add-repository http://winswitch.org/
+RUN apt-get update && apt-get -qy install --install-recommends winehq-devel xpra
 
 # X11 forwarding
 RUN mkdir /var/run/sshd

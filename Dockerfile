@@ -4,7 +4,8 @@ FROM ubuntu:16.04
 RUN echo 'root:remotex11' | chpasswd
 RUN dpkg --add-architecture i386
 ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get update && apt-get -qy upgrade && apt-get -qy install wget software-properties-common apt-transport-https openssh-server xauth cabextract winbind squashfs-tools xvfb x11vnc xserver-xephyr websockify
+ENV WINEDEBUG -all
+RUN apt-get update && apt-get -qy upgrade && apt-get -qy install wget software-properties-common apt-transport-https openssh-server xauth cabextract winbind squashfs-tools xvfb x11vnc xserver-xephyr websockify dbus pulseaudio 
 
 # wine & xpra
 RUN wget -qO- https://dl.winehq.org/wine-builds/Release.key | apt-key add - && apt-add-repository https://dl.winehq.org/wine-builds/ubuntu/
@@ -19,7 +20,7 @@ RUN echo "X11Forwarding yes\n" >> /etc/ssh/ssh_config
 RUN echo "ForwardX11Trusted yes\n" >> /etc/ssh/ssh_config
 
 # user
-RUN adduser --disabled-password --gecos "" wineuser
+RUN adduser -G xpra --disabled-password --gecos "" wineuser
 RUN echo 'wineuser:remotex11' | chpasswd
 USER wineuser
 ENV LOGNAME=wineuser

@@ -4,7 +4,7 @@ FROM ubuntu:16.04
 RUN dpkg --add-architecture i386
 ENV DEBIAN_FRONTEND noninteractive
 ENV WINEDEBUG -all
-RUN apt-get update && apt-get -qy upgrade && apt-get -qy install wget software-properties-common apt-transport-https openssh-server xauth cabextract winbind squashfs-tools xvfb x11vnc xserver-xephyr websockify dbus-x11 pulseaudio sudo xserver-xorg-video-dummy x11-apps
+RUN apt-get update && apt-get -qy upgrade && apt-get -qy install wget software-properties-common apt-transport-https openssh-server xauth cabextract winbind squashfs-tools xvfb x11vnc xserver-xephyr websockify dbus-x11 pulseaudio sudo xserver-xorg-video-dummy x11-apps xfce4
 
 # wine & xpra
 RUN wget -qO- https://dl.winehq.org/wine-builds/Release.key | apt-key add - && apt-add-repository https://dl.winehq.org/wine-builds/ubuntu/

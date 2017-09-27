@@ -39,7 +39,6 @@ RUN dpkg --add-architecture i386 && \
 	
 	# Cleaning up.
 	apt-get autoremove -y --purge software-properties-common && \
-	apt-get autoremove -y --purge xvfb && \
 	apt-get autoremove -y --purge && \
 	apt-get clean -y && \
 	rm -rf /home/wine/.cache && \

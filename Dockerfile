@@ -34,6 +34,7 @@ RUN dpkg --add-architecture i386 && \
 	wget https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks -O /tmp/winetricks && \
 	chmod +x /tmp/winetricks && \
 	cd /tmp && \
+	su -l wineuser -c winecfg && \
 	su -l wineuser -c 'xvfb-run -a /tmp/winetricks -q corefonts dotnet462' && \
 	
 	# Cleaning up.

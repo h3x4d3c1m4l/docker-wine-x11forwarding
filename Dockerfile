@@ -3,6 +3,7 @@ FROM ubuntu:16.04
 # inspired by webanck/docker-wine-steam
 
 # preparations
+WORKDIR /tmp
 ENV DEBIAN_FRONTEND noninteractive
 ENV WINEDEBUG -all
 ENV WINEPREFIX /home/wineuser/.wine

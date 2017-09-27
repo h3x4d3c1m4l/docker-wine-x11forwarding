@@ -33,7 +33,8 @@ RUN dpkg --add-architecture i386 && \
 	# winetricks
 	wget https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks -O /tmp/winetricks && \
 	chmod +x /tmp/winetricks && \
-	su -p -l wineuser -c 'xvfb-run -a /tmp/winetricks -q corefonts dotnet462' && \
+	cd /tmp && \
+	su -l wineuser -c 'xvfb-run -a /tmp/winetricks -q corefonts dotnet462' && \
 	
 	# Cleaning up.
 	apt-get autoremove -y --purge software-properties-common && \

@@ -3,11 +3,7 @@ FROM ubuntu:16.04
 # inspired by webanck/docker-wine-steam
 
 # preparations
-WORKDIR /tmp
 ENV DEBIAN_FRONTEND noninteractive
-ENV WINEDEBUG -all
-ENV WINEPREFIX /home/wineuser/.wine
-ENV WINEARCH win32
 
 	# activate i386 arch for Wine and install stuff we need
 RUN dpkg --add-architecture i386 && \
@@ -34,8 +30,8 @@ RUN dpkg --add-architecture i386 && \
 	wget https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks -O /tmp/winetricks && \
 	chmod +x /tmp/winetricks && \
 	cd /tmp && \
-	su -p -l wineuser -c winecfg && \
-	su -p -l wineuser -c 'xvfb-run -a /tmp/winetricks -q corefonts dotnet462' && \
+	su -l wineuser -c 'WINEDEBUG=-all WINEPREFIX=/home/wineuser/.wine WINEARCH=win32 winecfg' && \
+	su -l wineuser -c 'WINEDEBUG=-all WINEPREFIX=/home/wineuser/.wine WINEARCH=win32 xvfb-run -a /tmp/winetricks -q corefonts dotnet462' && \
 	
 	# Cleaning up.
 	apt-get autoremove -y --purge software-properties-common && \

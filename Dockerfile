@@ -8,7 +8,7 @@ ENV DEBIAN_FRONTEND noninteractive
 	# activate i386 arch for Wine and install stuff we need
 RUN dpkg --add-architecture i386 && \
 	apt-get update && \
-	apt-get -qy upgrade && apt-get -qy install wget software-properties-common apt-transport-https openssh-server xauth cabextract winbind squashfs-tools xvfb x11vnc xserver-xephyr websockify dbus-x11 pulseaudio sudo xserver-xorg-video-dummy x11-apps xfce4 && \
+	apt-get -qy upgrade && apt-get -qy install wget software-properties-common apt-transport-https openssh-server xauth cabextract winbind squashfs-tools xvfb x11vnc xserver-xephyr websockify dbus-x11 pulseaudio sudo xserver-xorg-video-dummy x11-apps xfce4 lpr joe && \
 	
 	# install latest Wine and Xpra
 	wget -qO- https://dl.winehq.org/wine-builds/Release.key | apt-key add - && \

@@ -15,7 +15,7 @@ RUN dpkg --add-architecture i386 && \
 	apt-add-repository https://dl.winehq.org/wine-builds/ubuntu/ && \
 	wget -qO- http://winswitch.org/gpg.asc | apt-key add - && \
 	apt-add-repository http://winswitch.org/ && \
-	apt-get update && apt-get -qy install --install-recommends wine-staging-compat xpra && \
+	apt-get update && apt-get -qy install --install-recommends winehq-devel xpra && \
 
 	# make sshd work and enable X11 forwarding
 	mkdir /var/run/sshd && \

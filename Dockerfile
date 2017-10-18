@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:17.04
 
 # inspired by webanck/docker-wine-steam
 
@@ -8,14 +8,12 @@ ENV DEBIAN_FRONTEND noninteractive
 	# activate i386 arch for Wine and install stuff we need
 RUN dpkg --add-architecture i386 && \
 	apt-get update && \
-	apt-get -qy upgrade && apt-get -qy install wget software-properties-common apt-transport-https openssh-server xauth cabextract winbind squashfs-tools xvfb x11vnc xserver-xephyr websockify dbus-x11 pulseaudio sudo xserver-xorg-video-dummy x11-apps xfce4 cups joe xrdp && \
+	apt-get -qy upgrade && apt-get -qy install wget software-properties-common apt-transport-https openssh-server xauth cabextract winbind squashfs-tools pulseaudio sudo x11-apps xfce4 cups joe xfce4-terminal xrdp xorgrdp && \
 	
-	# install latest Wine and Xpra
+	# install latest Wine
 	wget -qO- https://dl.winehq.org/wine-builds/Release.key | apt-key add - && \
 	apt-add-repository https://dl.winehq.org/wine-builds/ubuntu/ && \
-	wget -qO- http://winswitch.org/gpg.asc | apt-key add - && \
-	apt-add-repository http://winswitch.org/ && \
-	apt-get update && apt-get -qy install --install-recommends winehq-devel xpra && \
+	apt-get update && apt-get -qy install --install-recommends winehq-devel && \
 
 	# make sshd work and enable X11 forwarding
 	mkdir /var/run/sshd && \
@@ -24,7 +22,7 @@ RUN dpkg --add-architecture i386 && \
 	echo "ForwardX11Trusted yes\n" >> /etc/ssh/ssh_config && \
 
 	# create our user for Wine
-	useradd -m -s /bin/bash -G xpra,sudo,tty,video,dialout wineuser && echo 'wineuser:remotex11' | chpasswd && \
+	useradd -m -s /bin/bash -G sudo,tty,video,dialout wineuser && echo 'wineuser:remotex11' | chpasswd && \
 
 	# winetricks
 	wget https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks -O /tmp/winetricks && \

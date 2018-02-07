@@ -34,8 +34,12 @@ RUN dpkg --add-architecture i386 && \
 	# replace wine-devel for wine-staging
 	apt-get -qy purge winehq-devel && \
 	apt-get -o Dpkg::Options::="--force-overwrite" -qy install --install-recommends winehq-staging && \
-	su -l wineuser -c 'WINEDEBUG=-all WINEPREFIX=/home/wineuser/.wine WINEARCH=win32 wineboot -r' && \
-	su -l wineuser -c 'WINEDEBUG=-all WINEPREFIX=/home/wineuser/.wine WINEARCH=win32 wineserver --wait' && \
+	
+	# install Gecko
+	wget http://dl.winehq.org/wine/wine-gecko/2.47/wine_gecko-2.47-x86.msi -O /tmp/wine_gecko-x86.msi && \
+	wget http://dl.winehq.org/wine/wine-gecko/2.47/wine_gecko-2.47-x86_64.msi -O /tmp/wine_gecko-x86_64.msi && \
+	su -l wineuser -c 'WINEDEBUG=-all WINEPREFIX=/home/wineuser/.wine WINEARCH=win32 xvfb-run -a wine msiexec /i /tmp/wine_gecko-x86.msi' && \
+	su -l wineuser -c 'WINEDEBUG=-all WINEPREFIX=/home/wineuser/.wine WINEARCH=win32 xvfb-run -a wine msiexec /i /tmp/wine_gecko-x86_64.msi' && \
 	
 	# cleaning up
 	apt-get autoremove -y --purge software-properties-common && \

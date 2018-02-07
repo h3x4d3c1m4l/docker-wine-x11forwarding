@@ -29,7 +29,7 @@ RUN dpkg --add-architecture i386 && \
 	chmod +x /tmp/winetricks && \
 	cd /tmp && \
 	su -l wineuser -c 'WINEDEBUG=-all WINEPREFIX=/home/wineuser/.wine WINEARCH=win32 winecfg' && \
-	su -l wineuser -c 'WINEDEBUG=-all WINEPREFIX=/home/wineuser/.wine WINEARCH=win32 xvfb-run -a /tmp/winetricks -q corefonts dotnet462 vcrun2013 gecko' && \
+	su -l wineuser -c 'WINEDEBUG=-all WINEPREFIX=/home/wineuser/.wine WINEARCH=win32 xvfb-run -a /tmp/winetricks -q corefonts dotnet462 vcrun2013' && \
 	
 	# replace wine-devel for wine-staging
 	apt-get -qy purge winehq-devel && \

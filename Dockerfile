@@ -34,6 +34,8 @@ RUN dpkg --add-architecture i386 && \
 	# replace wine-devel for wine-staging
 	apt-get -qy purge winehq-devel && \
 	apt-get -o Dpkg::Options::="--force-overwrite" -qy install --install-recommends winehq-staging && \
+	su -l wineuser -c 'WINEDEBUG=-all WINEPREFIX=/home/wineuser/.wine WINEARCH=win32 wineboot -r' && \
+	su -l wineuser -c 'WINEDEBUG=-all WINEPREFIX=/home/wineuser/.wine WINEARCH=win32 wineserver --wait' && \
 	
 	# cleaning up
 	apt-get autoremove -y --purge software-properties-common && \
@@ -42,7 +44,6 @@ RUN dpkg --add-architecture i386 && \
 	rm -rf /home/wine/.cache && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN su -l wineuser -c 'WINEDEBUG=-all WINEPREFIX=/home/wineuser/.wine WINEARCH=win32 wineboot -i'
 USER root
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]

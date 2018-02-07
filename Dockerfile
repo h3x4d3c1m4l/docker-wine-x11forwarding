@@ -1,4 +1,4 @@
-FROM ubuntu:17.10
+FROM ubuntu:bionic
 
 # inspired by webanck/docker-wine-steam
 

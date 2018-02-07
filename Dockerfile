@@ -29,15 +29,11 @@ RUN dpkg --add-architecture i386 && \
 	chmod +x /tmp/winetricks && \
 	cd /tmp && \
 	su -l wineuser -c 'WINEDEBUG=-all WINEPREFIX=/home/wineuser/.wine WINEARCH=win32 winecfg' && \
-	su -l wineuser -c 'WINEDEBUG=-all WINEPREFIX=/home/wineuser/.wine WINEARCH=win32 xvfb-run -a /tmp/winetricks -q corefonts dotnet462 vcrun2013' && \
+	su -l wineuser -c 'WINEDEBUG=-all WINEPREFIX=/home/wineuser/.wine WINEARCH=win32 xvfb-run -a /tmp/winetricks -q corefonts dotnet462 vcrun2013 gecko' && \
 	
 	# replace wine-devel for wine-staging
 	apt-get -qy purge winehq-devel && \
 	apt-get -o Dpkg::Options::="--force-overwrite" -qy install --install-recommends winehq-staging && \
-	
-	# install Gecko
-	wget http://dl.winehq.org/wine/wine-gecko/2.47/wine_gecko-2.47-x86_64.msi -O /tmp/wine_gecko-x86_64.msi && \
-	su -l wineuser -c 'WINEDEBUG=-all WINEPREFIX=/home/wineuser/.wine WINEARCH=win32 xvfb-run -a wine /wait start msiexec /i /tmp/wine_gecko-x86_64.msi /qn' && \
 	
 	# cleaning up
 	apt-get autoremove -y --purge software-properties-common && \

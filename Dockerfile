@@ -31,6 +31,10 @@ RUN dpkg --add-architecture i386 && \
 	su -l wineuser -c 'WINEDEBUG=-all WINEPREFIX=/home/wineuser/.wine WINEARCH=win32 winecfg' && \
 	su -l wineuser -c 'WINEDEBUG=-all WINEPREFIX=/home/wineuser/.wine WINEARCH=win32 xvfb-run -a /tmp/winetricks -q corefonts dotnet462 vcrun2013' && \
 	
+	# replace wine-devel for wine-staging
+	apt-get -qy purge winehq-devel && \
+	apt-get -o Dpkg::Options::="--force-overwrite" -qy install --install-recommends winehq-staging && \
+	
 	# cleaning up
 	apt-get autoremove -y --purge software-properties-common && \
 	apt-get autoremove -y --purge && \

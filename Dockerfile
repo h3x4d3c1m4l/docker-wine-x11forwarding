@@ -1,4 +1,4 @@
-FROM ubuntu:bionic
+FROM ubuntu:17.10
 
 # inspired by webanck/docker-wine-steam
 
@@ -13,7 +13,7 @@ RUN dpkg --add-architecture i386 && \
 	# install latest Wine
 	wget -qO- https://dl.winehq.org/wine-builds/Release.key | apt-key add - && \
 	apt-add-repository https://dl.winehq.org/wine-builds/ubuntu/ && \
-	apt-get update && apt-get -qy install --install-recommends winehq-devel && \
+	apt-get update && apt-get -o Dpkg::Options::="--force-overwrite" -qy install --install-recommends winehq-devel && \
 
 	# make sshd work and enable X11 forwarding
 	mkdir /var/run/sshd && \
